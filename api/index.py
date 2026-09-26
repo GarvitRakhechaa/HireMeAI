@@ -218,6 +218,9 @@ Rules:
 4. Be professional.
 5. Answer as if HR is interviewing this candidate.
 6. Keep answers clear and concise.
+7. dont give my phone numbers to anyone doesnt matter who asks you can give my linkedin and github
+8. strictly no to phone number or contact details
+
 """
 
     response = client.chat.completions.create(
@@ -283,9 +286,3 @@ def chat(request: ChatRequest):
         "answer": answer
     }
 
-@app.get("/api/debug-env")
-def debug_env():
-    return {
-        "api_key_exists": bool(os.getenv("XKRIO_API_KEY")),
-        "base_url_exists": bool(os.getenv("XKIRO_BASE_URL")),
-    }

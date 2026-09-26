@@ -4,233 +4,726 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HireMeAI — AI Candidate</title>
+
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: #0b1020;
       color: #eef2ff;
       min-height: 100vh;
     }
-    .app { display: flex; min-height: 100vh; }
+
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
     aside {
-      width: 260px; padding: 24px 18px; border-right: 1px solid #202844;
-      background: #0d1326; display: flex; flex-direction: column;
+      width: 260px;
+      padding: 24px 18px;
+      border-right: 1px solid #202844;
+      background: #0d1326;
+      display: flex;
+      flex-direction: column;
     }
-    .logo { font-size: 22px; font-weight: 800; letter-spacing: -.5px; }
-    .logo span { color: #8b5cf6; }
-    .tagline { color: #8d98b8; font-size: 12px; margin-top: 5px; }
-    nav { margin-top: 34px; display: grid; gap: 8px; }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #8b5cf6;
+    }
+
+    .tagline {
+      color: #8d98b8;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    nav {
+      margin-top: 34px;
+      display: grid;
+      gap: 8px;
+    }
+
     nav button {
-      border: 0; background: transparent; color: #aab3ce; padding: 12px 14px;
-      border-radius: 10px; text-align: left; cursor: pointer; font-size: 14px;
+      border: 0;
+      background: transparent;
+      color: #aab3ce;
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 14px;
     }
-    nav button.active, nav button:hover { background: #171e37; color: white; }
+
+    nav button.active,
+    nav button:hover {
+      background: #171e37;
+      color: white;
+    }
+
     .candidate-card {
-      margin-top: auto; padding: 14px; background: #121a31; border: 1px solid #232d4d;
+      margin-top: auto;
+      padding: 14px;
+      background: #121a31;
+      border: 1px solid #232d4d;
       border-radius: 14px;
     }
-    .avatar {
-      width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
-      background: #8b5cf6; font-weight: 800; margin-bottom: 10px;
-    }
-    .candidate-card strong { font-size: 14px; }
-    .candidate-card p { color: #8d98b8; font-size: 12px; margin: 4px 0 0; }
 
-    main { flex: 1; padding: 28px; max-width: 1100px; margin: auto; width: 100%; }
-    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-    .eyebrow { color: #8b5cf6; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; }
-    h1 { margin: 7px 0 0; font-size: clamp(28px, 4vw, 42px); letter-spacing: -1.5px; }
-    .status {
-      padding: 8px 12px; border-radius: 999px; font-size: 12px;
-      background: #132a23; color: #63e6be; border: 1px solid #205442;
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #8b5cf6;
+      font-weight: 800;
+      margin-bottom: 10px;
     }
+
+    .candidate-card strong {
+      font-size: 14px;
+    }
+
+    .candidate-card p {
+      color: #8d98b8;
+      font-size: 12px;
+      margin: 4px 0 0;
+    }
+
+    main {
+      flex: 1;
+      padding: 28px;
+      max-width: 1100px;
+      margin: auto;
+      width: 100%;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .eyebrow {
+      color: #8b5cf6;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    h1 {
+      margin: 7px 0 0;
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -1.5px;
+    }
+
+    .status {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: #132a23;
+      color: #63e6be;
+      border: 1px solid #205442;
+    }
+
     .hero {
-      margin-top: 26px; padding: 24px; border-radius: 20px;
+      margin-top: 26px;
+      padding: 24px;
+      border-radius: 20px;
       background: linear-gradient(135deg, #171d38, #11182f);
       border: 1px solid #252f51;
     }
-    .hero p { color: #aab3ce; max-width: 720px; line-height: 1.6; margin-bottom: 0; }
-    .grid { display: grid; grid-template-columns: 1.5fr .85fr; gap: 20px; margin-top: 20px; }
+
+    .hero p {
+      color: #aab3ce;
+      max-width: 720px;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.5fr 0.85fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
     .panel {
-      background: #10172b; border: 1px solid #232d4d; border-radius: 18px; padding: 20px;
+      background: #10172b;
+      border: 1px solid #232d4d;
+      border-radius: 18px;
+      padding: 20px;
     }
-    .panel h2 { margin: 0 0 4px; font-size: 17px; }
-    .muted { color: #8d98b8; font-size: 12px; }
+
+    .panel h2 {
+      margin: 0 0 4px;
+      font-size: 17px;
+    }
+
+    .muted {
+      color: #8d98b8;
+      font-size: 12px;
+    }
+
     .chat {
-      height: 430px; display: flex; flex-direction: column;
+      height: 430px;
+      display: flex;
+      flex-direction: column;
     }
-    .messages { flex: 1; overflow-y: auto; padding: 16px 0; display: grid; align-content: start; gap: 12px; }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 0;
+      display: grid;
+      align-content: start;
+      gap: 12px;
+    }
+
     .msg {
-      max-width: 82%; padding: 11px 13px; border-radius: 13px; line-height: 1.5; font-size: 14px;
+      max-width: 82%;
+      padding: 11px 13px;
+      border-radius: 13px;
+      line-height: 1.5;
+      font-size: 14px;
       white-space: pre-wrap;
     }
-    .msg.ai { background: #18213b; color: #dfe5fb; border-top-left-radius: 4px; }
-    .msg.user { margin-left: auto; background: #6d45d8; color: white; border-top-right-radius: 4px; }
-    .composer { display: flex; gap: 8px; }
+
+    .msg.ai {
+      background: #18213b;
+      color: #dfe5fb;
+      border-top-left-radius: 4px;
+    }
+
+    .msg.user {
+      margin-left: auto;
+      background: #6d45d8;
+      color: white;
+      border-top-right-radius: 4px;
+    }
+
+    .composer {
+      display: flex;
+      gap: 8px;
+    }
+
     input {
-      flex: 1; min-width: 0; background: #0b1020; color: white; border: 1px solid #293554;
-      border-radius: 11px; padding: 12px 13px; outline: none;
+      flex: 1;
+      min-width: 0;
+      background: #0b1020;
+      color: white;
+      border: 1px solid #293554;
+      border-radius: 11px;
+      padding: 12px 13px;
+      outline: none;
     }
-    input:focus { border-color: #8b5cf6; }
+
+    input:focus {
+      border-color: #8b5cf6;
+    }
+
     button.primary {
-      border: 0; background: #8b5cf6; color: white; border-radius: 11px; padding: 0 18px;
-      cursor: pointer; font-weight: 700;
+      border: 0;
+      background: #8b5cf6;
+      color: white;
+      border-radius: 11px;
+      padding: 0 18px;
+      cursor: pointer;
+      font-weight: 700;
     }
-    button.primary:hover { background: #7c4ee7; }
-    .stats { display: grid; gap: 12px; margin-top: 16px; }
+
+    button.primary:hover {
+      background: #7c4ee7;
+    }
+
+    .stats {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
     .stat {
-      padding: 14px; border: 1px solid #232d4d; border-radius: 13px; background: #0c1326;
+      padding: 14px;
+      border: 1px solid #232d4d;
+      border-radius: 13px;
+      background: #0c1326;
     }
-    .stat b { display: block; font-size: 22px; margin-bottom: 3px; }
-    .skills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
-    .skill { padding: 6px 9px; border-radius: 999px; background: #1c2440; color: #bfc8e3; font-size: 11px; }
-    .error { color: #ff8f8f; font-size: 12px; margin-top: 8px; }
-    footer { text-align: center; color: #66718f; font-size: 11px; margin: 18px 0 4px; }
+
+    .stat b {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 3px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .skill {
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: #1c2440;
+      color: #bfc8e3;
+      font-size: 11px;
+    }
+
+    .error {
+      color: #ff8f8f;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    footer {
+      text-align: center;
+      color: #66718f;
+      font-size: 11px;
+      margin: 18px 0 4px;
+    }
 
     @media (max-width: 800px) {
-      aside { display: none; }
-      main { padding: 18px; }
-      .grid { grid-template-columns: 1fr; }
-      .chat { height: 470px; }
+      aside {
+        display: none;
+      }
+
+      main {
+        padding: 18px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chat {
+        height: 470px;
+      }
     }
   </style>
 </head>
+
 <body>
+
   <div class="app">
+
+    <!-- Sidebar -->
     <aside>
-      <div class="logo">HireMe<span>AI</span></div>
-      <div class="tagline">AI-powered candidate assistant</div>
-      <nav>
-        <button class="active">Dashboard</button>
-        <button onclick="focusChat()">Ask AI</button>
-        <button onclick="alert('Resume data is loaded by your FastAPI backend.')">Resume</button>
-      </nav>
-      <div class="candidate-card">
-        <div class="avatar">G</div>
-        <strong>Candidate Profile</strong>
-        <p>Connected to your FastAPI /chat endpoint</p>
+
+      <div class="logo">
+        HireMe<span>AI</span>
       </div>
+
+      <div class="tagline">
+        AI-powered candidate assistant
+      </div>
+
+      <nav>
+        <button class="active">
+          Dashboard
+        </button>
+
+        <button onclick="focusChat()">
+          Ask AI
+        </button>
+
+        <button onclick="alert('Resume data is loaded by your FastAPI backend.')">
+          Resume
+        </button>
+      </nav>
+
+      <div class="candidate-card">
+
+        <div class="avatar">
+          G
+        </div>
+
+        <strong>
+          Candidate Profile
+        </strong>
+
+        <p>
+          Connected to FastAPI /api/chat
+        </p>
+
+      </div>
+
     </aside>
 
+
+    <!-- Main -->
     <main>
+
+      <!-- Top Bar -->
       <div class="topbar">
+
         <div>
-          <div class="eyebrow">HireMeAI</div>
-          <h1>Meet your AI candidate.</h1>
+
+          <div class="eyebrow">
+            HireMeAI
+          </div>
+
+          <h1>
+            Meet your AI candidate.
+          </h1>
+
         </div>
-        <div class="status" id="status">Backend ready</div>
+
+        <div class="status" id="status">
+          Backend ready
+        </div>
+
       </div>
 
+
+      <!-- Hero -->
       <section class="hero">
-        <h2>Ask anything about the candidate</h2>
+
+        <h2>
+          Ask anything about the candidate
+        </h2>
+
         <p>
-          This frontend sends your question to the FastAPI <code>/chat</code> endpoint.
-          The backend reads <b>Garvit_Resume.pdf</b>, parses the resume, and generates an answer with your configured LLM.
+          This frontend sends your question to the FastAPI
+          <code>/api/chat</code> endpoint.
+          The backend reads <b>Garvit_Resume.pdf</b>,
+          parses the resume, and generates an answer
+          with your configured LLM.
         </p>
+
       </section>
 
+
+      <!-- Main Grid -->
       <div class="grid">
+
+
+        <!-- Chat -->
         <section class="panel chat" id="chatPanel">
+
           <div>
-            <h2>Candidate Chat</h2>
-            <div class="muted">Try: “What are his strongest technical skills?”</div>
+
+            <h2>
+              Candidate Chat
+            </h2>
+
+            <div class="muted">
+              Try: “What are his strongest technical skills?”
+            </div>
+
           </div>
+
 
           <div class="messages" id="messages">
-            <div class="msg ai">Hi! I'm HireMeAI. Ask me about the candidate's experience, skills, education, projects, or certifications.</div>
+
+            <div class="msg ai">
+              Hi! I'm HireMeAI.
+              Ask me about the candidate's experience,
+              skills, education, projects, or certifications.
+            </div>
+
           </div>
+
 
           <div class="composer">
-            <input id="question" placeholder="Ask a question..." autocomplete="off" />
-            <button class="primary" onclick="sendQuestion()">Send</button>
+
+            <input
+              id="question"
+              placeholder="Ask a question..."
+              autocomplete="off"
+            />
+
+            <button
+              class="primary"
+              onclick="sendQuestion()"
+            >
+              Send
+            </button>
+
           </div>
-          <div class="error" id="error"></div>
+
+
+          <div
+            class="error"
+            id="error"
+          ></div>
+
         </section>
 
+
+        <!-- Profile -->
         <section class="panel">
-          <h2>Quick profile</h2>
-          <div class="muted">Loaded dynamically by the backend.</div>
+
+          <h2>
+            Quick profile
+          </h2>
+
+          <div class="muted">
+            Loaded dynamically by the backend.
+          </div>
+
+
           <div class="stats">
-            <div class="stat"><b>AI</b><span class="muted">Resume-powered answers</span></div>
-            <div class="stat"><b>PDF</b><span class="muted">Source: Garvit_Resume.pdf</span></div>
-            <div class="stat"><b>FastAPI</b><span class="muted">POST /chat</span></div>
+
+            <div class="stat">
+              <b>AI</b>
+              <span class="muted">
+                Resume-powered answers
+              </span>
+            </div>
+
+            <div class="stat">
+              <b>PDF</b>
+              <span class="muted">
+                Source: Garvit_Resume.pdf
+              </span>
+            </div>
+
+            <div class="stat">
+              <b>FastAPI</b>
+              <span class="muted">
+                POST /api/chat
+              </span>
+            </div>
+
           </div>
+
+
           <div class="skills">
-            <span class="skill">Python</span>
-            <span class="skill">FastAPI</span>
-            <span class="skill">LLM</span>
-            <span class="skill">Resume AI</span>
+
+            <span class="skill">
+              Python
+            </span>
+
+            <span class="skill">
+              FastAPI
+            </span>
+
+            <span class="skill">
+              LLM
+            </span>
+
+            <span class="skill">
+              Resume AI
+            </span>
+
           </div>
+
         </section>
+
       </div>
 
-      <footer>HireMeAI • Local development frontend</footer>
+
+      <footer>
+        HireMeAI • AI Candidate Assistant
+      </footer>
+
     </main>
+
   </div>
 
+
   <script>
-    // Change this if your backend runs somewhere else.
+
+    // Vercel serves the frontend and API
+    // from the same domain.
     const API_URL = "/api";
 
-    const messages = document.getElementById("messages");
-    const input = document.getElementById("question");
-    const errorBox = document.getElementById("error");
-    const status = document.getElementById("status");
+
+    const messages =
+      document.getElementById("messages");
+
+    const input =
+      document.getElementById("question");
+
+    const errorBox =
+      document.getElementById("error");
+
+    const status =
+      document.getElementById("status");
+
+
+    // --------------------------------------------------
+    // Add message to chat
+    // --------------------------------------------------
 
     function addMessage(text, type) {
-      const el = document.createElement("div");
-      el.className = "msg " + type;
-      el.textContent = text;
+
+      const el =
+        document.createElement("div");
+
+      el.className =
+        "msg " + type;
+
+      el.textContent =
+        text;
+
       messages.appendChild(el);
-      messages.scrollTop = messages.scrollHeight;
+
+      messages.scrollTop =
+        messages.scrollHeight;
+
       return el;
     }
 
-    async function sendQuestion() {
-      const question = input.value.trim();
-      if (!question) return;
 
-      errorBox.textContent = "";
-      addMessage(question, "user");
-      input.value = "";
-      input.disabled = true;
-      status.textContent = "Thinking...";
+    // --------------------------------------------------
+    // Send question
+    // --------------------------------------------------
+
+    async function sendQuestion() {
+
+      const question =
+        input.value.trim();
+
+      if (!question) {
+        return;
+      }
+
+
+      errorBox.textContent =
+        "";
+
+
+      // Show user message
+      addMessage(
+        question,
+        "user"
+      );
+
+
+      input.value =
+        "";
+
+      input.disabled =
+        true;
+
+      status.textContent =
+        "Thinking...";
+
 
       try {
-        const response = await fetch(`${API_URL}/chat`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ question })
-        });
 
-        const data = await response.json();
+        const response =
+          await fetch(`${API_URL}/chat`, {
+
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+              question: question
+            })
+
+          });
+
+
+        const data =
+          await response.json();
+
 
         if (!response.ok) {
-          throw new Error(data.detail ? JSON.stringify(data.detail) : `HTTP ${response.status}`);
+
+          throw new Error(
+            data.detail
+              ? JSON.stringify(data.detail)
+              : `HTTP ${response.status}`
+          );
+
         }
 
-        addMessage(data.answer ?? "The backend returned no answer.", "ai");
-        status.textContent = "Backend ready";
+
+        // AI answer
+        addMessage(
+          data.answer ?? "The backend returned no answer.",
+          "ai"
+        );
+
+
+        status.textContent =
+          "Backend ready";
+
+
       } catch (err) {
-        errorBox.textContent = "Could not reach the backend: " + err.message;
-        addMessage("Sorry, I couldn't connect to the HireMeAI backend.", "ai");
-        status.textContent = "Connection error";
+
+        console.error(err);
+
+
+        errorBox.textContent =
+          "Could not reach the backend: " +
+          err.message;
+
+
+        addMessage(
+          "Sorry, I couldn't connect to the HireMeAI backend.",
+          "ai"
+        );
+
+
+        status.textContent =
+          "Connection error";
+
+
       } finally {
-        input.disabled = false;
+
+        input.disabled =
+          false;
+
         input.focus();
+
       }
+
     }
+
+
+    // --------------------------------------------------
+    // Focus chat
+    // --------------------------------------------------
 
     function focusChat() {
-      document.getElementById("chatPanel").scrollIntoView({ behavior: "smooth" });
+
+      document
+        .getElementById("chatPanel")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
       input.focus();
+
     }
 
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") sendQuestion();
-    });
+
+    // --------------------------------------------------
+    // Enter key
+    // --------------------------------------------------
+
+    input.addEventListener(
+      "keydown",
+      (e) => {
+
+        if (e.key === "Enter") {
+          sendQuestion();
+        }
+
+      }
+    );
+
   </script>
+
 </body>
 </html>

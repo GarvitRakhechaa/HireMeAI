@@ -1,0 +1,22 @@
+[project]
+name = "hiremeai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "garvitrakhecha", email = "garvitrakhecha786@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.141.1",
+    "ipykernel>=7.3.0",
+    "openai>=3.14.1",
+    "pydantic>=2.13.5",
+    "pypdf>=6.19.0",
+    "python-docx>=1.2.0",
+    "python-dotenv>=1.2.3",
+    "uvicorn>=0.53.0",
+]
+
+[project.scripts]
+hiremeai = "hiremeai:main"

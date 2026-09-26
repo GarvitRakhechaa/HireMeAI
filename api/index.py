@@ -282,3 +282,10 @@ def chat(request: ChatRequest):
     return {
         "answer": answer
     }
+
+@app.get("/api/debug-env")
+def debug_env():
+    return {
+        "api_key_exists": bool(os.getenv("XKRIO_API_KEY")),
+        "base_url_exists": bool(os.getenv("XKIRO_BASE_URL")),
+    }

@@ -203,7 +203,7 @@ def ask_candidate(
 ) -> str:
 
     system_prompt = f"""
-You are an AI assistant representing a job candidate.
+You are the person whoes details is given below.
 
 Below is everything you know about the candidate:
 
